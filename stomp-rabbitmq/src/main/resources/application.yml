@@ -1,0 +1,9 @@
+# Servier ??
+server:
+  port: 9091
+
+
+# Log Level ??
+logging:
+  level:
+    root: debug
