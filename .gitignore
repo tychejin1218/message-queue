@@ -13,3 +13,6 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+
+### docker-compose ###
+/docker-compose/rabbitmq/rabbitmq
