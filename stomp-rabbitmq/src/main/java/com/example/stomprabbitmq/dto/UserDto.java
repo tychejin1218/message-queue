@@ -1,4 +1,4 @@
-package com.example.stomprabbitmq;
+package com.example.stomprabbitmq.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,5 +15,5 @@ public class UserDto {
 
   private String teacherId;
   private String userId;
-  private String data;
+  private String message;
 }
