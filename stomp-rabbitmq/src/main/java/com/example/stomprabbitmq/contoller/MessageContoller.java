@@ -2,12 +2,15 @@ package com.example.stomprabbitmq.contoller;
 
 import com.example.stomprabbitmq.dto.UserDto;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Queue;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -75,5 +78,86 @@ public class MessageContoller {
   public void sendMessagAxios(@RequestBody UserDto userDto) {
     simpMessageSendingOperations.convertAndSend("/queue/" + userDto.getTeacherId(),
         userDto.getMessage());
+  }
+
+  /**
+   * /queue 테스트
+   *
+   * @param userDto 설명
+   */
+  /*@RequestMapping(value = "/send/message/test01", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios01(@RequestBody UserDto userDto) {
+    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(),
+        userDto.getMessage());
+  }*/
+
+  /**
+   * /queue 테스트
+   *
+   * @param userDto 설명
+   */
+  @RequestMapping(value = "/send/message/test01", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios01(@RequestBody UserDto userDto) {
+    Map<String, Object> headers = new HashMap<>();
+    headers.put("x-max-length", 3);
+    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(),
+        userDto.getMessage(), headers);
+  }
+
+  /**
+   * /amq/queue 테스트
+   *
+   * @param userDto 설명
+   */
+  @RequestMapping(value = "/send/message/test02", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios02(@RequestBody UserDto userDto) {
+    simpMessagingTemplate.convertAndSend("/amq/queue/" + userDto.getTeacherId(),
+        userDto.getMessage());
+  }
+
+  /**
+   * /temp-queue 테스트
+   *
+   * @param userDto 설명
+   */
+  @RequestMapping(value = "/send/message/test03", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios03(@RequestBody UserDto userDto) {
+    /*simpMessagingTemplate.convertAndSend("/temp-queue/" + userDto.getTeacherId(),
+        userDto.getMessage());*/
+    Map<String, Object> headers = new HashMap<>();
+    headers.put("reply-to", "/temp-queue/test");
+    simpMessageSendingOperations.convertAndSend("/queue/" + userDto.getTeacherId(),
+        userDto.getMessage(), headers);
+  }
+
+  /**
+   * /topic 테스트
+   *
+   * @param userDto 설명
+   */
+  @RequestMapping(value = "/send/message/test04", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios04(@RequestBody UserDto userDto) {
+    simpMessagingTemplate.convertAndSend("/topic/" + userDto.getTeacherId(),
+        userDto.getMessage());
+  }
+
+  /**
+   * /exchange 테스트
+   *
+   * @param userDto 설명
+   */
+  @RequestMapping(value = "/send/message/test05", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios05(@RequestBody UserDto userDto) {
+
+    simpMessagingTemplate.convertAndSend("/amq.topic/" + userDto.getTeacherId(),
+        userDto.getMessage());
+    /*simpMessagingTemplate.convertAndSend("/exchange/" + userDto.getTeacherId(),
+        userDto.getMessage());*/
   }
 }

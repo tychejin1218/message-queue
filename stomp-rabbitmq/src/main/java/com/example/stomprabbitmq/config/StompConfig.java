@@ -1,11 +1,15 @@
 package com.example.stomprabbitmq.config;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.messaging.simp.config.StompBrokerRelayRegistration;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+@RequiredArgsConstructor
 @EnableWebSocketMessageBroker
 @Configuration
 public class StompConfig implements WebSocketMessageBrokerConfigurer {
@@ -16,7 +20,6 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
     // Client에서 WebSocker 연결할 때 사용할 API 경로 설정
     registry.addEndpoint("/ws")
         .setAllowedOriginPatterns("*")
-        //.setHandshakeHandler(new CustomHandshakeHandler())
         .withSockJS();
   }
 
@@ -28,8 +31,7 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
 
     // 메시지를 받을 때 경로 설정
     // RabbitMQ 관리자(localhost:15672) > Connections 탭에서 연결 확인할 수 있음
-    registry.enableStompBrokerRelay("/queue", "/topic", "/exchange", "/amq/queue")
-        .setAutoStartup(true)
+    registry.enableStompBrokerRelay("/topic")
         .setRelayHost("localhost")
         .setVirtualHost("/dev")
         .setRelayPort(61613)
