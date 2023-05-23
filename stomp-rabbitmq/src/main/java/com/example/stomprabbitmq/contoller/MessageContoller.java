@@ -22,9 +22,18 @@ public class MessageContoller {
   @RequestMapping(value = "/send/message/test01", method = RequestMethod.POST)
   @ResponseBody
   public void sendMessagAxios01(@RequestBody UserDto userDto) {
-    Map<String, Object> headers = new HashMap<>();
+    /*Map<String, Object> headers = new HashMap<>();
     headers.put("x-max-length", 3);
     simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(),
-        userDto.getMessage(), headers);
+        userDto.getMessage(), headers);*/
+    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(),
+        userDto.getMessage());
+  }
+
+  @RequestMapping(value = "/send/message/test02", method = RequestMethod.POST)
+  @ResponseBody
+  public void sendMessagAxios02(@RequestBody UserDto userDto) {
+    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(),
+        userDto.getMessage());
   }
 }
