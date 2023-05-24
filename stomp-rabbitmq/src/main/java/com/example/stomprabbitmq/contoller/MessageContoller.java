@@ -68,9 +68,10 @@ public class MessageContoller {
   public void sendMessagAxios01(@RequestBody UserDto userDto) {
 
     Map headers = Map.of(
+        "persistent", true,
         "x-expires", 1000 * 60 * 60, // Queue가 사용되지 않은 상태(Consumer가 없을 때) 유지되는 시간이며, 초과 시 자동으로 삭제
         "x-message-ttl", 1000 * 60 * 10, // Queue에 전송된 메시지가 유지되는 시간이며, 초과 시 자동으로 삭제(큐 단위로 설정)
-        "x-overflow", "drop-head", // 가장 오래된 메시지를 삭제하고, 새로운 메시지를 저장
+        "x-overflow", "drop-head", // 가장 오래된 메시지를 삭제하여 새로운 메시지를 수용
         "x-queue-name", "teacher_" + userDto.getTeacherId()
     );
 

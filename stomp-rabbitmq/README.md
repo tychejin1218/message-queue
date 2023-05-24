@@ -6,10 +6,11 @@
   * rabbitmq-plugins enable rabbitmq_stomp
 
 ---
-### Queue Properties
-* Durable
-* Exclusive
-* Auto-delete
+### STOMP 사용 시 RabbitMQ Queue Properties
+##### RabbitMQ Queue Properties
+* durable(aliased as persistent): 메시지 브로커에 의해 메시지를 디스크에 지속적으로 저장하도록 지정하는 옵션입니다. 메시지를 수신한 후에도 메시지가 보존되어야 할 필요가 있는 경우 사용됩니다.
+* auto-delete: 큐나 익스체인지가 더 이상 사용되지 않을 때 자동으로 삭제되는지 여부를 지정합니다. 모든 구독이 해제될 때 해당 큐나 익스체인지가 자동으로 삭제됩니다.
+* exclusive: 큐나 익스체인지를 생성한 연결에 대해 전용으로 만드는 데 사용됩니다. 해당 큐나 익스체인지는 다른 연결에서 접근할 수 없으며, 생성한 연결에서만 접근할 수 있도록 제한됩니다.
 * Arguments
   * x-dead-letter-exchange 및 x-dead-letter-routing-key: 큐에 도달하지 못한 메시지를 전달할 대체 교환 및 라우팅 키를 지정합니다.
   * x-expires: 큐의 자동 삭제 시간을 설정합니다. 설정된 시간 이후에 큐는 자동으로 삭제됩니다.
