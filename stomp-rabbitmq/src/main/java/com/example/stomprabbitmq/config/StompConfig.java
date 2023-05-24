@@ -38,4 +38,41 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
         .setClientLogin("guest")
         .setClientPasscode("guest");
   }
+
+  /*@Override
+  public void configureClientInboundChannel(ChannelRegistration registration) {
+    // 메시지채널에서 주고받는 메시지를 확인 및/또는 수정할 수 있는 인터셉터 추가
+    registration.interceptors(new ChannelInterceptor() {
+      // 메시지가 실제로 채널로 전송되기 전에 호출됨
+      @Override
+      public Message<?> preSend(Message<?> message, MessageChannel channel) {
+        StompHeaderAccessor headerAccessor =
+            MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
+        log.info("headerAccessor : {}", headerAccessor);
+
+        // 헤더에서 유저명을 가져온다.
+        List<String> usernames = Optional
+            .ofNullable(headerAccessor.getNativeHeader("username"))
+            .orElseGet(Collections::emptyList);
+        log.info("usernames : {}", usernames);
+
+        // 처음 접속 시도시 유저 데이터를 심어준다.
+        if (StompCommand.CONNECT.equals(headerAccessor.getCommand()) && !usernames.isEmpty()) {
+          log.info("username : {}", new SimpleUsernamePrincipal(usernames.get(0)));
+          headerAccessor.setUser(new SimpleUsernamePrincipal(usernames.get(0)));
+          sessionKeys.put(usernames.get(0), headerAccessor.getSessionId());
+        }
+
+        // 사용자 접속 해제시 사용자 큐를 삭제한다.
+        if (StompCommand.DISCONNECT.equals(headerAccessor.getCommand())) {
+          String sessionKey = sessionKeys.get(headerAccessor.getUser().getName());
+          // message-user는 생성되는 큐의 접두사
+          // /users/queue/message의 message를 가져와 -user를 붙여만든다.
+          new RabbitAdmin(rabbitTemplate).deleteQueue("message-user" + sessionKey);
+          sessionKeys.remove(sessionKey);
+        }
+
+        return message;
+      }
+    });*/
 }

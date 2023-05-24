@@ -69,24 +69,22 @@ public class MessageContoller {
 
     Map headers = Map.of(
         "x-expires", 1000 * 60 * 60, // Queue가 사용되지 않은 상태(Consumer가 없을 때) 유지되는 시간이며, 초과 시 자동으로 삭제
-        "x-message-ttl", 1000 * 10 * 60, // Queue에 전송된 메시지가 유지되는 시간이며, 초과 시 자동으로 삭제
+        "x-message-ttl", 1000 * 60 * 10, // Queue에 전송된 메시지가 유지되는 시간이며, 초과 시 자동으로 삭제(큐 단위로 설정)
+        "x-overflow", "drop-head", // 가장 오래된 메시지를 삭제하고, 새로운 메시지를 저장
         "x-queue-name", "teacher_" + userDto.getTeacherId()
     );
 
-    MessagePostProcessor messageHeaders = message -> {
+    /*MessagePostProcessor messageHeaders = message -> {
       SimpMessageHeaderAccessor accessor = SimpMessageHeaderAccessor.wrap(message);
-      accessor.setHeader("message-id", userDto.getUserId());
+      accessor.setHeader("message-id", "123");
+      accessor.setHeader("message-user", "456");
       return MessageBuilder.createMessage(message.getPayload(), accessor.getMessageHeaders());
     };
 
     simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(), userDto, headers,
-        messageHeaders);
+        messageHeaders);*/
 
-    /*simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(), userDto, headers,
-        message ->
-            MessageBuilder.fromMessage(message)
-                .setHeader("durable", true)
-                .build());*/
+    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(), userDto, headers);
   }
 
   @RequestMapping(value = "/send/message/test02", method = RequestMethod.POST)
