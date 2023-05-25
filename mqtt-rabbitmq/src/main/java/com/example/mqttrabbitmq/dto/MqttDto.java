@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-public class topMqttDto {
+public class MqttDto {
 
   @Getter
   @Setter
