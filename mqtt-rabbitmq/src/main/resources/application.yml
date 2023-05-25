@@ -5,4 +5,4 @@ server:
 # Log Level ??
 logging:
   level:
-    root: info
+    root: debug
