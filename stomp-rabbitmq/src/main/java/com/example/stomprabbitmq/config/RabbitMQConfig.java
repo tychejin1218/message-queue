@@ -1,6 +1,5 @@
 package com.example.stomprabbitmq.config;
 
-import com.rabbitmq.client.impl.ChannelN;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -34,5 +33,4 @@ public class RabbitMQConfig {
     rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
     return rabbitTemplate;
   }
-
 }

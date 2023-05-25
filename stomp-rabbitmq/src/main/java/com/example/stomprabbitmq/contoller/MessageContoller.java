@@ -41,31 +41,9 @@ public class MessageContoller {
   private final RabbitTemplate rabbitTemplate;
   private final SimpMessagingTemplate simpMessagingTemplate;
 
-  /*@RequestMapping(value = "/send/message/test01", method = RequestMethod.POST)
-  @ResponseBody
-  public void sendMessagAxios01(@RequestBody UserDto userDto) {
-
-    String queueName = userDto.getTeacherId();
-
-    if (!isQueueExists(queueName)) {
-      createQueue(queueName);
-    }
-
-    rabbitTemplate.convertAndSend(queueName, userDto,
-        message -> {
-          MessageProperties messageProperties = message.getMessageProperties();
-          messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT); // 장애 상황에서도 손실되지 않도록 설정
-          messageProperties.setExpiration("5000"); // 5000ms(5초)로 설정
-          messageProperties.setContentType("application/json"); // JSON 형식
-          return new Message(message.getBody(), messageProperties);
-        }
-    );
-    //simpMessagingTemplate.convertAndSend("/queue/" + queueName, userDto);
-  }*/
-
   @RequestMapping(value = "/send/message/test01", method = RequestMethod.POST)
   @ResponseBody
-  public void sendMessagAxios01(@RequestBody UserDto userDto) {
+  public void sendMessag01(@RequestBody UserDto userDto) {
 
     Map headers = Map.of(
         "amqp-message-id", userDto.getUserId(), // message-id
@@ -75,26 +53,23 @@ public class MessageContoller {
         "x-queue-name", "teacher_" + userDto.getTeacherId()
     );
 
-    /*MessagePostProcessor messageHeaders = message -> {
-      SimpMessageHeaderAccessor accessor = SimpMessageHeaderAccessor.wrap(message);
-      accessor.setHeader("message-id", "123");
-      accessor.setHeader("message-user", "456");
-      return MessageBuilder.createMessage(message.getPayload(), accessor.getMessageHeaders());
-    };
-
-    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(), userDto, headers,
-        messageHeaders);*/
-
     simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(), userDto, headers);
   }
 
   @RequestMapping(value = "/send/message/test02", method = RequestMethod.POST)
   @ResponseBody
-  public void sendMessagAxios02(@RequestBody UserDto userDto) {
-//    Map map = Map.of("x-queue-name", "teacher" + userDto.getTeacherId());
-//    simpMessagingTemplate.convertAndSend("/topic/" + userDto.getTeacherId(), userDto, map);
+  public void sendMessag02(@RequestBody UserDto userDto) {
 
-    simpMessagingTemplate.convertAndSend("/queue/" + userDto.getTeacherId(), userDto);
+    Map headers = Map.of(
+        "amqp-message-id", userDto.getUserId(), // message-id
+        "x-expires", 1000 * 60 * 60, // Queue가 사용되지 않은 상태(Consumer가 없을 때) 유지되는 시간이며, 초과 시 자동으로 삭제
+        "x-message-ttl", 1000 * 60 * 10, // Queue에 전송된 메시지가 유지되는 시간이며, 초과 시 자동으로 삭제(큐 단위로 설정)
+        "x-overflow", "drop-head", // 가장 오래된 메시지를 삭제하여 새로운 메시지를 수용
+        "x-queue-name", "student_" + userDto.getUserId()
+    );
+
+    simpMessagingTemplate.convertAndSend(
+        "/queue/" + userDto.getTeacherId() + "-" + userDto.getUserId(), userDto, headers);
   }
 
   /***
