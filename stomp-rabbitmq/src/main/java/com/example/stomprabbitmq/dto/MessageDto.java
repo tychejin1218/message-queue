@@ -14,5 +14,6 @@ import lombok.ToString;
 public class MessageDto {
 
   private String teacherId;
+  private String studentId;
   private String message;
 }

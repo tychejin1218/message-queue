@@ -38,8 +38,7 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
    */
   @Override
   public void configureMessageBroker(MessageBrokerRegistry registry) {
-    registry.setApplicationDestinationPrefixes("/pub") // 메시지 발행(publish)할 경로를 설정
-        .enableStompBrokerRelay("/queue", "/topic", "/exchange") // 메시지 구독(subscribe)할 경로를 설정
+    registry.enableStompBrokerRelay("/queue", "/topic", "/exchange") // 메시지 구독(subscribe)할 경로를 설정
         // RabbitMQ 브로커와 연결을 위한 호스트, 가상 호스트 및 포트, 관리자 로그인 설정
         // RabbitMQ 관리자(localhost:15672) > Connections 탭에서 연결 확인할 수 있음
         .setRelayHost("localhost")

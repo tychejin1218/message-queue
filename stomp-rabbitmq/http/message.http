@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
     "teacherId" : "T0001",
-    "message" : "Message Test02"
+    "message" : "Message Test01"
 }
 
 ### 메시지 전송2
