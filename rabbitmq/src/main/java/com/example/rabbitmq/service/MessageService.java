@@ -32,6 +32,7 @@ public class MessageService {
   public void sendMessage01(UserDto userDto) {
     log.info("message : {}", userDto.toString());
     if ("STK".equals(userDto.getSubjectCode())) {
+
       rabbitTemplate.convertAndSend(exchange, routingKeyStk, userDto);
     } else if ("STE".equals(userDto.getSubjectCode())) {
       rabbitTemplate.convertAndSend(exchange, routingKeySte, userDto);

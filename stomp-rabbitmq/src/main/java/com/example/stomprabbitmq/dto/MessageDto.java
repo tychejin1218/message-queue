@@ -1,6 +1,5 @@
 package com.example.stomprabbitmq.dto;
 
-import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +11,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto implements Serializable {
+public class MessageDto {
 
   private String teacherId;
-  private String userId;
   private String message;
 }

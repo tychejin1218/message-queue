@@ -1,0 +1,26 @@
+### 메시지 전송1
+POST http://localhost:9091/send/message
+Content-Type: application/json
+
+{
+    "teacherId" : "T0001",
+    "message" : "Message Test02"
+}
+
+### 메시지 전송2
+POST http://localhost:9091/send/message
+Content-Type: application/json
+
+{
+  "teacherId" : "T0001",
+  "message" : "Message Test02"
+}
+
+### 메시지 전송3
+POST http://localhost:9091/send/message
+Content-Type: application/json
+
+{
+  "teacherId" : "T0001",
+  "message" : "Message Test03"
+}

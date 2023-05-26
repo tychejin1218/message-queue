@@ -4,7 +4,8 @@
   * docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 -p 61613:61613 --restart=unless-stopped rabbitmq:management
 * STOMP 플러그인
   * rabbitmq-plugins enable rabbitmq_stomp
-
+* lvc_exchange 플러그인
+  * curl -L https://github.com/rabbitmq/rabbitmq-lvc-exchange/releases/download/v3.11.4/rabbitmq_lvc_exchange-v3.11.4.ez
 ---
 ### STOMP 사용 시 RabbitMQ Queue Properties
 ##### RabbitMQ Queue Properties
