@@ -156,6 +156,5 @@ public class MessageTestContoller {
   public void createQueue(String queueName) {
     Queue queue = new Queue(queueName);
     rabbitAdmin.declareQueue(queue);
-
   }
 }

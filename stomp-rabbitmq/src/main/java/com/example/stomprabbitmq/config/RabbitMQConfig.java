@@ -1,5 +1,8 @@
 package com.example.stomprabbitmq.config;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;

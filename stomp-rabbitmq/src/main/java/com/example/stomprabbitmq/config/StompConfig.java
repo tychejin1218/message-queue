@@ -7,6 +7,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -52,14 +53,19 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
 
   @Override
   public void configureClientInboundChannel(ChannelRegistration registration) {
-    // 메시지 채널에서 주고받는 메시지를 확인 및 수정할 수 있는 인터셉터 추가
     registration.interceptors(new ChannelInterceptor() {
-      // 메시지가 채널로 전송되기 전에 호출
       @Override
       public Message<?> preSend(Message<?> message, MessageChannel channel) {
 
         StompHeaderAccessor stompHeaderAccessor = StompHeaderAccessor.wrap(message);
-        log.info("stompHeaderAccessor : {}", stompHeaderAccessor);
+
+        if (StompCommand.CONNECT.equals(stompHeaderAccessor.getCommand())) {
+          log.info("configureClientInboundChannel Connect...");
+        }
+
+        if (StompCommand.SUBSCRIBE.equals(stompHeaderAccessor.getCommand())) {
+          log.info("configureClientInboundChannel Subscribe...");
+        }
 
         return message;
       }
