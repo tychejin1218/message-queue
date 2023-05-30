@@ -40,4 +40,16 @@ public class MessageContoller {
     messageService.sendMessageHeader(messageDto);
     return ResponseEntity.ok().build();
   }
+
+  /**
+   * 메시지 브로커로 메시지를 전송
+   *
+   * @param messageDto 메시지 정보
+   * @return 메시지 전송 결과
+   */
+  @RequestMapping(value = "/send/message/test", method = RequestMethod.POST)
+  public ResponseEntity<?> sendMessageTest(@RequestBody MessageDto messageDto) {
+    messageService.sendMessageTest(messageDto);
+    return ResponseEntity.ok().build();
+  }
 }
