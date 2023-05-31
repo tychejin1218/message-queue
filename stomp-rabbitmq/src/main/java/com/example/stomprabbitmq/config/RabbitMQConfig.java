@@ -1,8 +1,5 @@
 package com.example.stomprabbitmq.config;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -22,6 +19,8 @@ public class RabbitMQConfig {
     connectionFactory.setPort(5672);
     connectionFactory.setUsername("guest");
     connectionFactory.setPassword("guest");
+//    Host 대신에 URI를 사용
+//    connectionFactory.setUri("");
     return connectionFactory;
   }
 
