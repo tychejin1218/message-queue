@@ -26,8 +26,8 @@ public class MessageTestContoller {
 
   private final SimpMessagingTemplate simpMessagingTemplate;
   private final ConnectionFactory connectionFactory;
-  private final RabbitAdmin rabbitAdmin;
-  private final RabbitTemplate rabbitTemplate;
+//  private final RabbitAdmin rabbitAdmin;
+//  private final RabbitTemplate rabbitTemplate;
 
   /*@MessageMapping("/send/message")
   public void sendMessage(@RequestBody MessageDto messageDto) {
@@ -144,17 +144,17 @@ public class MessageTestContoller {
    * @param queueName 큐(Queue)명
    * @return 큐 존재 여부
    */
-  public boolean isQueueExists(String queueName) {
-    return rabbitAdmin.getQueueProperties(queueName) != null;
-  }
+//  public boolean isQueueExists(String queueName) {
+//    return rabbitAdmin.getQueueProperties(queueName) != null;
+//  }
 
   /**
    * 큐(Queue)를 생성
    *
    * @param queueName 설명
    */
-  public void createQueue(String queueName) {
-    Queue queue = new Queue(queueName);
-    rabbitAdmin.declareQueue(queue);
-  }
+//  public void createQueue(String queueName) {
+//    Queue queue = new Queue(queueName);
+//    rabbitAdmin.declareQueue(queue);
+//  }
 }

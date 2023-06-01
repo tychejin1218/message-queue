@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessageService {
 
-  private final RabbitAdmin rabbitAdmin;
+//  private final RabbitAdmin rabbitAdmin;
   private final SimpMessagingTemplate simpMessagingTemplate;
 
   /**
@@ -44,9 +44,9 @@ public class MessageService {
     );
 
     String queueName = messageDto.getTeacherId();
-    if (!isQueueExists(queueName)) {
-      createQueue(queueName, headers);
-    }
+//    if (!isQueueExists(queueName)) {
+//      createQueue(queueName, headers);
+//    }
 
     simpMessagingTemplate.convertAndSend("/queue/" + queueName, messageDto.getMessage(), headers);
   }
@@ -71,9 +71,9 @@ public class MessageService {
 
       String queueName = messageDto.getTeacherId() + "_" + a;
 
-      if (!isQueueExists(queueName)) {
-        createQueue(queueName, headers);
-      }
+//      if (!isQueueExists(queueName)) {
+//        createQueue(queueName, headers);
+//      }
 
       simpMessagingTemplate.convertAndSend("/queue/" + queueName, messageDto.getMessage() + "_" + a,
           headers);
@@ -86,21 +86,21 @@ public class MessageService {
    * @param queueName 큐(Queue)명
    * @return 큐 존재 여부
    */
-  public boolean isQueueExists(String queueName) {
-    return rabbitAdmin.getQueueProperties(queueName) != null;
-  }
+//  public boolean isQueueExists(String queueName) {
+//    return rabbitAdmin.getQueueProperties(queueName) != null;
+//  }
 
   /**
    * 큐(Queue)를 생성
    *
    * @param queueName 설명
    */
-  public void createQueue(String queueName, Map<String, Object> arguments) {
-    Queue queue = new Queue(queueName,
-        (Boolean) arguments.get("persistent"),
-        (Boolean) arguments.get("exclusive"),
-        (Boolean) arguments.get("auto-delete"),
-        arguments);
-    rabbitAdmin.declareQueue(queue);
-  }
+//  public void createQueue(String queueName, Map<String, Object> arguments) {
+//    Queue queue = new Queue(queueName,
+//        (Boolean) arguments.get("persistent"),
+//        (Boolean) arguments.get("exclusive"),
+//        (Boolean) arguments.get("auto-delete"),
+//        arguments);
+//    rabbitAdmin.declareQueue(queue);
+//  }
 }

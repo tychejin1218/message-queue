@@ -1,0 +1,18 @@
+# Service ??
+server:
+  port: 9091
+
+
+---
+# Log Level ??
+logging:
+  level:
+    root: debug
+
+
+---
+# ActiveMQ ??
+activemq:
+  broker-url:
+  user:
+  password:
