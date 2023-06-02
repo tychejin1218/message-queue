@@ -49,7 +49,7 @@ public class ActiveMQConfig {
     jmsTemplate.setExplicitQosEnabled(true);
     jmsTemplate.setDeliveryPersistent(false);
     jmsTemplate.setReceiveTimeout(1000 * 10);
-    jmsTemplate.setTimeToLive(6000 * 10);
+    jmsTemplate.setTimeToLive(6000 * 10 * 10);
     return jmsTemplate;
   }
 

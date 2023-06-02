@@ -1,6 +1,10 @@
 package com.example.stompactivemq.service;
 
 import com.example.stompactivemq.dto.MessageDto;
+import jakarta.jms.Message;
+import jakarta.jms.MessageConsumer;
+import jakarta.jms.Queue;
+import java.util.Enumeration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
@@ -24,10 +28,47 @@ public class MessageService {
 
     try {
 
-      //String data = new ObjectMapper().writeValueAsString(messageDto);
-      String data = messageDto.getMessage();
       String destinationName = messageDto.getTeacherId();
       String correlationId = messageDto.getStudentId();
+
+      jmsTemplate.browse(destinationName, (session, browser) -> {
+
+        Enumeration enumeration = browser.getEnumeration();
+        while (enumeration.hasMoreElements()) {
+          Message message = (Message) enumeration.nextElement();
+          log.info("MessageID: {}, CorrelationID: {}", message.getJMSMessageID(),
+              message.getJMSCorrelationID());
+
+          if (correlationId.equals(message.getJMSCorrelationID())) {
+            message.acknowledge();
+
+            Queue queue = session.createQueue(destinationName);
+
+            MessageConsumer messageConsumer = session.createConsumer(queue,
+                "JMSCorrelationID = '" + message.getJMSCorrelationID() + "'");
+            Message receivedMessage = messageConsumer.receiveNoWait();
+
+            // null...
+            if (receivedMessage != null) {
+
+              log.info("receivedMessage.getJMSMessageID: {}, message.getJMSMessageID: {}",
+                  receivedMessage.getJMSMessageID(), message.getJMSMessageID());
+
+              if (receivedMessage.getJMSMessageID().equals(message.getJMSMessageID())) {
+                receivedMessage.acknowledge();
+                log.info("Message Deleted - MessageId:{}", message.getJMSMessageID());
+              }
+            }
+
+            messageConsumer.close();
+          }
+        }
+
+        return null;
+      });
+
+      //String data = new ObjectMapper().writeValueAsString(messageDto);
+      String data = messageDto.getMessage();
 
       jmsTemplate.convertAndSend(destinationName, data, message -> {
         message.setStringProperty("subject-code", messageDto.getSubjectCode());
