@@ -10,7 +10,8 @@ server:
 logging:
   level:
     root: debug
-
+    org.apache.activemq: INFO
+    org.apache.activemq.spring: WARN
 
 ---
 # ActiveMQ ?? ??

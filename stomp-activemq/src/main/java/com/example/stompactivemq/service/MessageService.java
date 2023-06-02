@@ -1,21 +1,9 @@
 package com.example.stompactivemq.service;
 
 import com.example.stompactivemq.dto.MessageDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.jms.DeliveryMode;
-import jakarta.jms.JMSException;
-import jakarta.jms.Message;
-import java.io.Serializable;
-import java.sql.Timestamp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.activemq.advisory.AdvisorySupport;
-import org.apache.activemq.command.ActiveMQMessage;
-import org.apache.activemq.command.MessageId;
 import org.springframework.jms.core.JmsTemplate;
-
-import org.springframework.jms.core.MessagePostProcessor;
 import org.springframework.stereotype.Service;
 
 @Slf4j
