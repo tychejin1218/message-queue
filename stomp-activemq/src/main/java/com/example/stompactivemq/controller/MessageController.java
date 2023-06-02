@@ -22,4 +22,16 @@ public class MessageController {
     messageService.sendMessage(messageDto);
     return ResponseEntity.ok().build();
   }
+
+  @RequestMapping(value = "/message/publish2", method = RequestMethod.POST)
+  public ResponseEntity<?> messagePublish2(@RequestBody MessageDto messageDto) {
+    messageService.sendMessage2(messageDto);
+    return ResponseEntity.ok().build();
+  }
+
+  @RequestMapping(value = "/message/publish3", method = RequestMethod.POST)
+  public ResponseEntity<?> messagePublish3(@RequestBody MessageDto messageDto) {
+    messageService.sendMessage3(messageDto);
+    return ResponseEntity.ok().build();
+  }
 }

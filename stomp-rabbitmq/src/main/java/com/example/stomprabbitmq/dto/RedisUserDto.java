@@ -1,5 +1,6 @@
-package com.example.stompactivemq.dto;
+package com.example.stomprabbitmq.dto;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,14 +9,12 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageDto {
+
+public class RedisUserDto {
 
   private String teacherId;
-  private String studentId;
-  private String subjectCode;
+  private String userId;
   private String message;
 }
-

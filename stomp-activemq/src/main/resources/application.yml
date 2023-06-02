@@ -13,15 +13,15 @@ logging:
 
 
 ---
-# ActiveMQ ??
+# ActiveMQ ?? ??
 activemq:
-  user:
-  password:
+  user: pan_admin
+  password: dkpan@#2023!$
   openwire:
-    protocol:
-    url:
-    port:
+    protocol: ssl
+    url: b-f142d8f9-4d6e-4736-9a78-1bf6cd395c86-1.mq.ap-northeast-2.amazonaws.com
+    port: 61617
   stomp:
-    protocol:
-    url:
-    port:
+    protocol: stomp+ssl
+    url: b-f142d8f9-4d6e-4736-9a78-1bf6cd395c86-1.mq.ap-northeast-2.amazonaws.com
+    port: 61614

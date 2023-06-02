@@ -42,13 +42,13 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
     registry.enableStompBrokerRelay("/queue", "/topic", "/exchange") // 메시지 구독(subscribe)할 경로를 설정
         // RabbitMQ 브로커와 연결을 위한 호스트, 가상 호스트 및 포트, 관리자 로그인 설정
         // RabbitMQ 관리자(localhost:15672) > Connections 탭에서 연결 확인할 수 있음
-        .setRelayHost("b-f142d8f9-4d6e-4736-9a78-1bf6cd395c86-1.mq.ap-northeast-2.amazonaws.com")
+        .setRelayHost("")
         .setVirtualHost("/")
         .setRelayPort(61614)
-//        .setSystemLogin("guest")
-//        .setSystemPasscode("guest")
-        .setClientLogin("pan_admin")
-        .setClientPasscode("dkpan@#2023!$");
+        .setSystemLogin("")
+        .setSystemPasscode("")
+        .setClientLogin("")
+        .setClientPasscode("");
   }
 
   @Override

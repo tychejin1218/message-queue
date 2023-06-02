@@ -49,7 +49,27 @@ public class ActiveMQConfig {
     jmsTemplate.setExplicitQosEnabled(true);
     jmsTemplate.setDeliveryPersistent(false);
     jmsTemplate.setReceiveTimeout(1000 * 10);
-    jmsTemplate.setTimeToLive(1000 * 10);
+    jmsTemplate.setTimeToLive(6000 * 10);
+    return jmsTemplate;
+  }
+
+  @Bean
+  public JmsTemplate jmsTemplate2() {
+    JmsTemplate jmsTemplate = new JmsTemplate(activeMQConnectionFactory());
+    jmsTemplate.setExplicitQosEnabled(true);
+    jmsTemplate.setDeliveryPersistent(false);
+    jmsTemplate.setReceiveTimeout(1000 * 10);
+    jmsTemplate.setTimeToLive(6000 * 10 * 2);
+    return jmsTemplate;
+  }
+
+  @Bean
+  public JmsTemplate jmsTemplate3() {
+    JmsTemplate jmsTemplate = new JmsTemplate(activeMQConnectionFactory());
+    jmsTemplate.setExplicitQosEnabled(true);
+    jmsTemplate.setDeliveryPersistent(false);
+    jmsTemplate.setReceiveTimeout(1000 * 10);
+    jmsTemplate.setTimeToLive(6000 * 10 * 3);
     return jmsTemplate;
   }
 }
