@@ -16,7 +16,7 @@ public class MessageTestService {
   private final JmsTemplate jmsTemplate;
   private final String queueName = "test-queue";
 
-  public void sendMessage(MessageDto messageDto) {
+  public void sendMessageTestQueue(MessageDto messageDto) {
     jmsTemplate.convertAndSend(queueName, messageDto.getMessage());
   }
 

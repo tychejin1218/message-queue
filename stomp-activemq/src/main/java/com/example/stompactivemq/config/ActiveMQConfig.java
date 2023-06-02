@@ -13,8 +13,14 @@ import org.springframework.jms.core.JmsTemplate;
 @Configuration
 public class ActiveMQConfig {
 
-  @Value("${activemq.broker-url}")
-  private String brokerUrl;
+  @Value("${activemq.openwire.protocol}")
+  private String openWireProtocol;
+
+  @Value("${activemq.openwire.url}")
+  private String openWireUrl;
+
+  @Value("${activemq.openwire.port}")
+  private String openWirePort;
 
   @Value("${activemq.user}")
   private String user;
@@ -30,7 +36,8 @@ public class ActiveMQConfig {
   @Bean
   public ActiveMQConnectionFactory activeMQConnectionFactory() {
     ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
-    activeMQConnectionFactory.setBrokerURL(brokerUrl);
+    activeMQConnectionFactory.setBrokerURL(
+        openWireProtocol + "://" + openWireUrl + ":" + openWirePort);
     activeMQConnectionFactory.setUserName(user);
     activeMQConnectionFactory.setPassword(password);
     return activeMQConnectionFactory;
@@ -38,6 +45,11 @@ public class ActiveMQConfig {
 
   @Bean
   public JmsTemplate jmsTemplate() {
-    return new JmsTemplate(activeMQConnectionFactory());
+    JmsTemplate jmsTemplate = new JmsTemplate(activeMQConnectionFactory());
+    jmsTemplate.setExplicitQosEnabled(true);
+    jmsTemplate.setDeliveryPersistent(false);
+    jmsTemplate.setReceiveTimeout(1000 * 10);
+    jmsTemplate.setTimeToLive(1000 * 10);
+    return jmsTemplate;
   }
 }

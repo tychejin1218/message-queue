@@ -1,7 +1,7 @@
 package com.example.stompactivemq.controller;
 
 import com.example.stompactivemq.dto.MessageDto;
-import com.example.stompactivemq.service.MessageTestService;
+import com.example.stompactivemq.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class MessageTestController {
+public class MessageController {
 
-  private final MessageTestService messageTestService;
+  private final MessageService messageService;
 
-  @RequestMapping(value = "/message/publish/test-queue", method = RequestMethod.POST)
-  public ResponseEntity<?> messagePublishTestQueue(@RequestBody MessageDto messageDto) {
-    messageTestService.sendMessageTestQueue(messageDto);
+  @RequestMapping(value = "/message/publish", method = RequestMethod.POST)
+  public ResponseEntity<?> messagePublish(@RequestBody MessageDto messageDto) {
+    messageService.sendMessage(messageDto);
     return ResponseEntity.ok().build();
   }
 }

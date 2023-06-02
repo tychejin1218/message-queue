@@ -1,6 +1,8 @@
 # Service ??
 server:
   port: 9091
+  servlet:
+    context-path: /api
 
 
 ---
@@ -13,6 +15,13 @@ logging:
 ---
 # ActiveMQ ??
 activemq:
-  broker-url:
   user:
   password:
+  openwire:
+    protocol:
+    url:
+    port:
+  stomp:
+    protocol:
+    url:
+    port:
