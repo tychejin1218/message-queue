@@ -1,13 +1,13 @@
-# Service Post ??
+# Service Post 설정
 server:
   port: 9091
 
-# Log Level ??
+# Log Level 설정
 logging:
   level:
     root: info
 
-# RabbitMQ ?? ??
+# RabbitMQ 연결 정보
 spring:
   rabbitmq:
     host: localhost
@@ -15,7 +15,7 @@ spring:
     username: guest
     password: guest
 
-# RabbitMQ queue, exchange, routing-key ??
+# RabbitMQ queue, exchange, routing-key 정보
 rabbitmq:
   queue.name: sample.queue
   exchange.name: sample.exchange

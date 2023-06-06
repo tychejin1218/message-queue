@@ -18,9 +18,9 @@ public class MessageController {
   private final MessageService messageService;
 
   /**
-   * 메시지를 RabbitMQ에 전송
+   * Queue로 메시지를 발행
    *
-   * @param messageDto 전송할 메시지의 DTO 객체
+   * @param messageDto 발행할 메시지의 DTO 객체
    * @return ResponseEntity 객체로 응답을 반환
    */
   @RequestMapping(value = "/send/message", method = RequestMethod.POST)

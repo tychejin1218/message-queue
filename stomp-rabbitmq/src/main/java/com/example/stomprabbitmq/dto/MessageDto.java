@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-
-@Getter
+import lombok.ToString;@Getter
 @Setter
 @ToString
 @AllArgsConstructor
@@ -17,3 +15,5 @@ public class MessageDto {
   private String studentId;
   private String message;
 }
+
+
