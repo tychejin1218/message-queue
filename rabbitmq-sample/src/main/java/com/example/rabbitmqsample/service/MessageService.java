@@ -17,6 +17,9 @@ public class MessageService {
   @Value("${rabbitmq.exchange.name}")
   private String exchangeName;
 
+  @Value("${rabbitmq.routing.key}")
+  private String routingKey;
+
   private final RabbitTemplate rabbitTemplate;
 
   /**
@@ -26,7 +29,7 @@ public class MessageService {
    */
   public void sendMessage(MessageDto messageDto) {
     log.info("message sent: {}", messageDto.toString());
-    rabbitTemplate.convertAndSend(exchangeName, "sample.queue", messageDto);
+    rabbitTemplate.convertAndSend(exchangeName, routingKey, messageDto);
   }
 
   /**
@@ -34,8 +37,8 @@ public class MessageService {
    *
    * @param messageDto 구독한 메시지를 담고 있는 MessageDto 객체
    */
-  @RabbitListener(queues = {"${rabbitmq.queue.name}"})
-  public void consume(MessageDto messageDto) {
-    log.info(String.format("Received message: {}", messageDto.toString()));
+  @RabbitListener(queues = "${rabbitmq.queue.name}")
+  public void reciveMessage(MessageDto messageDto) {
+    log.info("Received message: {}", messageDto.toString());
   }
 }
