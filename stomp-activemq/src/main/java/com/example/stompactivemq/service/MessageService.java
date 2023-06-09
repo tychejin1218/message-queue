@@ -31,16 +31,20 @@ public class MessageService {
       String destinationName = messageDto.getTeacherId();
       String correlationId = messageDto.getStudentId();
 
+      // 메시지를 소비하지는 않고 조회만 함
       jmsTemplate.browse(destinationName, (session, browser) -> {
 
         Enumeration enumeration = browser.getEnumeration();
         while (enumeration.hasMoreElements()) {
           Message message = (Message) enumeration.nextElement();
+
+
           log.info("MessageID: {}, CorrelationID: {}", message.getJMSMessageID(),
               message.getJMSCorrelationID());
 
           if (correlationId.equals(message.getJMSCorrelationID())) {
             message.acknowledge();
+
 
             Queue queue = session.createQueue(destinationName);
 
