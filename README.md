@@ -1,2 +1,2 @@
 ## Message Queue
-- #### ActiveMQ
+- #### RabbitMQ Sample
