@@ -1,7 +1,7 @@
-package com.example.activemqsample.contoller;
+package com.example.activemq.contoller;
 
-import com.example.activemqsample.dto.MessageDto;
-import com.example.activemqsample.service.MessageService;
+import com.example.activemq.dto.MessageDto;
+import com.example.activemq.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.activemqsample.dto;
+package com.example.activemq.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

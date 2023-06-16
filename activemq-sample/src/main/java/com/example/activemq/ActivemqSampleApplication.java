@@ -1,4 +1,4 @@
-package com.example.activemqsample;
+package com.example.activemq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
