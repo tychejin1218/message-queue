@@ -1,6 +1,6 @@
 package com.example.activemq.config;
 
-import com.example.activemqsample.dto.MessageDto;
+import com.example.activemq.dto.MessageDto;
 import jakarta.jms.Queue;
 import java.util.HashMap;
 import java.util.Map;
