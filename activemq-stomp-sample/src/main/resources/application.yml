@@ -19,4 +19,4 @@ spring:
 
 # Activemq queue 정보
 activemq:
-  queue.name: sample.queue
+  queue.name: sample-queue
