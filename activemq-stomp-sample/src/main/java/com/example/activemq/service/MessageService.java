@@ -27,14 +27,4 @@ public class MessageService {
     log.info("message sent: {}", messageDto.toString());
     jmsTemplate.convertAndSend(queueName, messageDto);
   }
-
-  /**
-   * Queue에서 메시지를 구독
-   *
-   * @param messageDto 구독한 메시지를 담고 있는 MessageDto 객체
-   */
-  @JmsListener(destination = "${activemq.queue.name}")
-  public void reciveMessage(MessageDto messageDto) {
-    log.info("Received message: {}", messageDto.toString());
-  }
 }
