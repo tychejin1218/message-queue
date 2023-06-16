@@ -1,0 +1,19 @@
+# Service Post \uC124\uC815
+server:
+  port: 9091
+
+# Log Level \uC124\uC815
+logging:
+  level:
+    root: info
+
+# ActiveMQ \uC811\uC18D \uC815\uBCF4
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+
+# Activemq queue \uC815\uBCF4
+activemq:
+  queue.name: sample.queue
