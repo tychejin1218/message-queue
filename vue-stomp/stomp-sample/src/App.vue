@@ -1,15 +1,16 @@
 <template>
   <div id="app">
+    <label>Title: </label>
+    <input type="text" placeholder="Title 입력" v-model="title" />
+
+    <label>Content: </label>
+    <input type="text" placeholder="Content 입력" v-model="content" />
+
+    <button type="submit" @click="sendMessage()">전송</button>
+
     <div>
-      <p>발행</p>
-      <p>Title: <input v-model="publishTitle" type="text" /></p>
-      <p>Content: <input v-model="publishContent" type="text" /></p>
-      <p><button @click="sendMessage()">전송</button></p>
-    </div>
-    <div>
-      <p>구독</p>
-      <p>Title: {{ subscribeTitle }}</p>
-      <p>Content: {{ subscribeContent }}</p>
+      <label>구독 메시지</label>
+      <span v-html="subscribeMessage"></span>
     </div>
   </div>
 </template>
@@ -23,10 +24,9 @@ export default {
   name: "App",
   data() {
     return {
-      publishTitle: "",
-      publishContent: "",
-      subscribeTitle: "",
-      subscribeContent: "",
+      title: "",
+      content: "",
+      subscribeMessage: "",
     };
   },
   created() {
@@ -36,16 +36,13 @@ export default {
     sendMessage() {
       if (this.publishTitle !== "" && this.publishContent !== "") {
         this.send();
-        this.publishTitle = "";
-        this.publishContent = "";
       }
     },
     send() {
-      console.log("title:" + this.publishTitle + ", Content: " + this.publishContent);
       axios
         .post("http://localhost:9091/send/message", {
-          title: this.publishTitle,
-          content: this.publishContent,
+          title: this.title,
+          content: this.content,
         })
         .then(function (response) {
           console.log(response);
@@ -69,8 +66,7 @@ export default {
           vm.stompClient.subscribe("/queue/sample-queue", (response) => {
             console.log("구독으로 받은 메시지", response.body);
             let body = JSON.parse(response.body);
-            this.subscribeTitle = body.title;
-            this.subscribeContent = body.content;
+            this.subscribeMessage = this.subscribeMessage + "<br/> title: " + body.title + ", contect: " + body.content;
           });
         },
         (error) => {
@@ -91,5 +87,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+label {
+  margin-left: 5px;
+}
+button {
+  margin-left: 5px;
+}
+div {
+  margin-top: 10px;
 }
 </style>
