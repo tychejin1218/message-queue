@@ -1,0 +1,17 @@
+### 큐(Queue)로 메시지 발행
+POST http://localhost:9091/send/message/queue
+Content-Type: application/json
+
+{
+    "title" : "[Queue] Message Title ",
+    "content" : "[Queue] Message Content"
+}
+
+### 토픽(Topic)으로 메시지 발행
+POST http://localhost:9091/send/message/topic
+Content-Type: application/json
+
+{
+  "title" : "[Topic] Message Title",
+  "content" : "[Topic] Message Content"
+}

@@ -1,0 +1,20 @@
+# Service Post ??
+server:
+  port: 9091
+
+# Log Level ??
+logging:
+  level:
+    root: info
+
+# ActiveMQ ?? ??
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+
+# Activemq Queue, Topic ??
+activemq:
+  queue.name: sample-queue
+  topic.name: sample-topic
