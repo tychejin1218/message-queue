@@ -1,6 +1,5 @@
 package com.example.activemq.service;
 
-
 import com.example.activemq.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

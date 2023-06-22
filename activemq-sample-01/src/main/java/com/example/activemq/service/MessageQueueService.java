@@ -1,6 +1,5 @@
 package com.example.activemq.service;
 
-
 import com.example.activemq.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,7 @@ public class MessageQueueService {
    *
    * @param messageDto 구독한 메시지를 담고 있는 MessageDto 객체
    */
-  @JmsListener(destination = "${activemq.queue.name}")
+  @JmsListener(destination = "${activemq.queue.name}", containerFactory = "containerFactoryQueue")
   public void reciveMessageQueue(MessageDto messageDto) {
     log.info("Received message from queue: {}", messageDto.toString());
   }
