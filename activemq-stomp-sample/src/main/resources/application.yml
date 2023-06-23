@@ -20,3 +20,8 @@ spring:
 # Activemq queue 정보
 activemq:
   queue.name: sample-queue
+
+# API KEY 정보
+api-key:
+  name: X-API-KEY
+  value: B09ED8799B61ABE6331D3DA5BCFD72ADAFAC5329C3990B3F4075687CAE532CC6

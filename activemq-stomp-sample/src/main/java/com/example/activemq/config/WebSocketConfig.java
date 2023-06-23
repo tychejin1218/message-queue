@@ -1,9 +1,12 @@
 package com.example.activemq.config;
 
+import com.example.activemq.common.stomp.StompErrorHandler;
+import com.example.activemq.common.stomp.StompPreHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -14,6 +17,9 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker // WebSocket 메시지 브로커를 활성화
 @Configuration
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+  private final StompPreHandler stompPreHandler;
+  private final StompErrorHandler stompErrorHandler;
 
   @Value("${spring.activemq.stomp.host}")
   private String activemqStompHost;
@@ -35,6 +41,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     registry.addEndpoint("/ws") // WebSocket 엔드포인트 설정
         .setAllowedOriginPatterns("*")
         .withSockJS(); // withSockJS()를 사용하여 SockJS를 활성화
+    registry.setErrorHandler(stompErrorHandler);
   }
 
   /**
@@ -50,6 +57,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         .setSystemPasscode(activemqPassword)
         .setClientLogin(activemqUsername)
         .setClientPasscode(activemqPassword);
+  }
+
+  /**
+   * 메시지 요청/응답에 관련된 인터셉터를 추가
+   */
+  @Override
+  public void configureClientInboundChannel(ChannelRegistration registration) {
+    registration.interceptors(stompPreHandler);
   }
 }
 
