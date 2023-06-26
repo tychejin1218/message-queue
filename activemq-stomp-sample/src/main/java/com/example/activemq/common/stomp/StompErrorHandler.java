@@ -50,4 +50,3 @@ public class StompErrorHandler extends StompSubProtocolErrorHandler {
         accessor.getMessageHeaders());
   }
 }
-
