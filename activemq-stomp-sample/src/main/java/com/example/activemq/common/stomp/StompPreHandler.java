@@ -36,7 +36,7 @@ public class StompPreHandler implements ChannelInterceptor {
 
     StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
-    // 메시지의 구독 명령이 SUBSCRIBE인 경우에만 실행
+    // 메시지의 구독 명령이 CONNECT인 경우에만 실행
     if (StompCommand.CONNECT.equals(accessor.getCommand())) {
       StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(message);
 
