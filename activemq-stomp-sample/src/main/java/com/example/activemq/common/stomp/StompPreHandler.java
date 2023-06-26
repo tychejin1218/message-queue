@@ -37,7 +37,7 @@ public class StompPreHandler implements ChannelInterceptor {
     StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
     // 메시지의 구독 명령이 SUBSCRIBE인 경우에만 실행
-    if (StompCommand.SUBSCRIBE.equals(accessor.getCommand())) {
+    if (StompCommand.CONNECT.equals(accessor.getCommand())) {
       StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(message);
 
       // 메시지의 헤더에서 'X-API-KEY'으로 지정된 헤더 값을 가져와 'B09ED8799B61ABE6331D3DA5BCFD72ADAFAC5329C3990B3F4075687CAE532CC6'와 비교
